@@ -1,0 +1,20 @@
+.container {
+ 	width: 800px;
+ 	margin-top: 30px;
+ 	margin-left: 350px;
+ 	padding-bottom: 20px;
+ 	margin-bottom: 30px;
+ 	background: white;
+ 	box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
+#sidebar {
+	position: fixed;
+} 
+
+
+#btn-new {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+

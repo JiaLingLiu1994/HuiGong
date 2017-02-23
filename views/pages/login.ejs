@@ -1,0 +1,32 @@
+<!DOCTYPE html >
+<html >
+<head>
+  <% include ../partials/header.ejs %>
+	<title>惠功文理補習班--登入</title>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/login.css">
+</head>
+
+<body>
+
+<% include ../partials/nav.ejs %>
+
+<div class="login">
+  <div class="login-triangle"></div>
+  
+  <h2 class="login-header">登入</h2>
+
+  <form class="login-container" action="/login" method="POST">
+    <p><input type="text" name="username" placeholder="帳號"></p>
+    <p><input type="password" name="password" placeholder="密碼"></p>
+    <p><input type="submit" value="登入"></p>
+  </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.4.0/velocity.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/4d5ece1593.js"></script>
+
+
+</body>
+
+</html>

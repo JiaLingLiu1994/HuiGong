@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../../partials/admin_header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/students.css">
+
+</head>
+<body>
+<section id="sidebar"> 
+  <div class="white-label">
+  </div> 
+  <div id="sidebar-nav">   
+    <ul>
+      <li><a href="/admin/post"></i>貼文管理</a></li>
+      <li><a href="/admin/contactbook"></i>聯絡簿管理</a></li>
+      <li><a href="/admin/classManager"></i>班級管理</a></li>
+      <li class="active"><a href="/admin/students">學生管理</a></li>
+      <li><a href="/admin/teachers">老師管理</a></li>
+      <li><a href="/admin/admin_chat">信箱</a></li>
+      <li><a href="/admin/logout">登出</a></li>
+    </ul>
+  </div>
+</section>
+<section id="content">
+  <div class="content">
+    <div class="container">
+        <div class="container col-md-4 col-sm-3" id="panel1">
+  <!--<div class="col-md-8 form-group pull-left">-->
+  <!--  <form class="navbar-form" role="search">-->
+  <!--    <div class="form-group input-group col-md-12">-->
+  <!--      <input type="text" class="form-control" placeholder="Search users" name="q" autofocus>-->
+  <!--      <div class="input-group-btn">-->
+  <!--        <button class="btn btn-default btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </form>-->
+  <!--</div>-->
+  
+  
+  
+  <div class="form-group col-md-12" >
+    <div class="col-md-4 pull-left">
+    <a class="btn btn-default btn-primary btn-new" href="/admin/newStudent">新增</a>
+  </div>
+    <table class="table table-bordered table-hover info_table">
+      <thead>
+        <tr class="dropup">
+          <!--<th><input type="checkbox" unchecked></th>-->
+          <th >帳號</th>
+          <th >學生姓名</th>
+          <th>電話</th>
+          <th >父親姓名</th>
+          <th >電話</th>
+          <th >母親姓名</th>
+          <th >電話</th>
+          <th >點數</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% student.forEach( function( student ){ %>
+        <tr>
+          <!--<td><input type="checkbox" unchecked></td>-->
+          <td><%= student.username %></td>
+          <td><%= student.name %></td>
+          <td><%= student.student_phone %></td>
+          <td><%= student.father_name %></td>
+          <td><%= student.father_phone %></td>
+          <td><%= student.mother_name %></td>
+          <td><%= student.mother_phone %></td>
+          <td><%= student.point %></td>
+          <td><form action="/admin/editStudents" method="GET">
+              <input hidden type="text" name="username" value="<%= student.username %>" />
+              <input type="submit" value="修改" class="btn btn-default" />
+              </form></td>
+        </tr>
+        
+        
+        
+        <% }); %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<% include ../../partials/admin_scripts.ejs %>
+<script type="text/javascript" src="/stylesheets/js/students.js"></script>
+
+</body>
+</html>

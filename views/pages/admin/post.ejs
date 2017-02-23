@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <% include ../../partials/admin_header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/post_admin.css">
+
+</head>
+
+<body>
+
+<section id="sidebar"> 
+  <div class="white-label">
+  </div> 
+  <div id="sidebar-nav">   
+    <ul>
+     <li class="active"><a href="/admin/post"></i>貼文管理</a></li>
+     <li><a href="/admin/contactbook"></i>聯絡簿管理</a></li>
+     <li><a href="/admin/classManager"></i>班級管理</a></li>
+     <li><a href="/admin/students">學生管理</a></li>
+     <li><a href="/admin/teachers">老師管理</a></li>
+     <li><a href="/admin/admin_chat">信箱</a></li>   
+     <li><a href="/admin/logout">登出</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="content">
+<div id="newPostModal" class="newPostModal">
+     <!-- Modal content -->
+      <div class="newPostModal-content">
+         <span class="close">x</span>
+           <a id="btn-back" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> 返回</span></a>
+
+          <form action="/admin/post" method="POST">
+           
+          <div class="form-group">
+           <label for="title">標題</label>
+             <input type="text" class="form-control" id="title" name="title">
+          </div>
+
+          <div class="form-group">
+           <label for="content">內容</label>
+           <textarea class="form-control" rows="10" name="content"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image">選擇圖片</label>
+            <input type="file" id="image">
+          </div>
+
+          <div class="form-group">
+           <label for="Name">發佈人：</label>
+           <input type="text"  id="name" name="post_user">
+           
+            <!--<label for="date">日期：</label>-->
+            <% var date = new Date(); %>
+            
+           <input hidden type="text" id="date" placeholder="2099/01/31" name="post_date" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日">
+          </div>
+          
+          <div class="form-group ">
+            <!--<label for="notification">推播通知</label>-->
+            <p>是否傳送推撥通知 <input type="checkbox"  name="notification"></p>
+          </div>
+          <div class="form-group">
+         <button id="btn_submit" type="submit" class="btn btn-primary">發佈文章</button>
+         </div>
+        </form>
+        <form ref='uploadForm' id='uploadForm' action='/upload' method='POST' encType="multipart/form-data">
+        <input type="file" name="sampleFile" />
+        <input type='submit' value='Upload!' />
+    </form>     
+      </div>
+    </div>
+  <div class="content">
+    <div class="container">
+
+     <a id="btn-new" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> 新增文章</span></a>
+     <!-- The Modal -->
+
+      <h1>文章列表</h1>
+      <ul class="list">
+       <% allArticles.forEach( function( article ){ %>
+     <!--  if u want to delete item , use <span class="delete"><i class="fa fa-trash"></i></span> -->
+        <li class="articleItem">
+            <%= article.title %>
+            
+            <form hidden id="<%= article.id %>" action="/admin/editPost_article" method="GET">
+              <input hidden type="text" name="article_id" value="<%= article.id %>" />
+              <input hidden type="submit" value="" />
+              
+            </form>
+            
+            <span id="<%= article.id %>" class="modify submit-span"><i class="fa fa-pencil-square-o"></i></span>
+            
+        </li>
+        
+       <% }); %>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<% include ../../partials/admin_scripts.ejs %>
+<script type="text/javascript" src="/stylesheets/js/post.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>管理頁面</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <link rel="stylesheet" type="text/css" href="css/newClass.css">
+    <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<section id="sidebar"> 
+  <div class="white-label">
+  </div> 
+  <div id="sidebar-nav">   
+    <ul>
+     <li><a href="/admin/post"></i>貼文管理</a></li>
+     <li><a href="/admin/contactbook"></i>聯絡簿管理</a></li>
+     <li class="active"><a href="/admin/classManager"></i>班級管理</a></li>
+     <li><a href="/admin/students">學生管理</a></li>
+     <li><a href="/admin/teachers">老師管理</a></li>
+     <li><a href="/admin/admin_chat">信箱</a></li>     
+     <li><a href="/admin/logout">登出</a></li>
+    </ul>
+  </div>
+</section>
+<section class="container">
+<h1 id="newClass">建立班級</h1>
+<p style="color:red">注意:年級+班級名稱請勿相同</p>
+  <div>
+    <form action="/admin/classManager" method="POST">
+       <div class="form-group">
+        <label for="formGroupName">年級</label>
+        <!--<input type="text" class="form-control" name="grade" id="formGroupName" placeholder="國一">-->
+        <select name="grade" id="formGroupName"  class="form-control">
+          <option value="小一">小一</option>
+        　<option value="小二">小二</option>
+        　<option value="小三">小三</option>
+        　<option value="小四">小四</option>
+        　<option value="小五">小五</option>
+        　<option value="小六">小六</option>
+        　<option value="國一">國一</option>
+        　<option value="國二">國二</option>
+        　<option value="國三">國三</option>
+        　<option value="高一">高一</option>
+        　<option value="高二">高二</option>
+        　<option value="高三">高三</option>
+        </select>
+       </div>
+       <div class="form-group">
+        <label for="formGroupName">班級名稱</label>
+        <input type="text" class="form-control" name="category" id="formGroupName" placeholder="數學班">
+       </div>
+       <div class="form-group">
+         <label for="formGroupDate">時間</label>
+         <input type="text" class="form-control" name="date" id="formGroupDate" placeholder="禮拜三">
+       </div>
+       <div class="form-group">
+        <label for="formGroupTime">時段</label>
+        <input type="text" class="form-control" name="time" id="formGroupTime" placeholder="18:00~21:00">
+       </div>
+       <div class="form-group">
+         <label for="formGroupTeacher">授課老師</label>
+         <input type="text" class="form-control" name="teacher" id="formGroupTeacher" placeholder="惠功老師">
+       </div>
+    <!--<p id="new"><input type="text" name="name" placeholder="國一數學班"></p>-->
+    <!--<p id="new"><input type="text" name="date" placeholder="禮拜三"></p>-->
+    <!--<p id="new"><input type="text" name="time" placeholder="晚上六點到九點"></p>-->
+    <!-- <p id="new"><input type="text" name="teacher" placeholder="惠功老師"></p>-->
+    <p id="newClass"><button class="btn btn-default btn-primary">建立班級</button></p>
+    </form>
+  </div>
+</section>
+
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

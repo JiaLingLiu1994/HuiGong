@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>管理頁面</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <link rel="stylesheet" type="text/css" href="css/students.css">
+    <script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<section id="sidebar"> 
+  <div class="white-label">
+  </div> 
+  <div id="sidebar-nav">   
+    <ul>
+      <li><a href="/admin/post"></i>貼文管理</a></li>
+      <li class="active"><a href="/admin/contactbook"></i>聯絡簿管理</a></li>
+      <li><a href="/admin/classManager"></i>班級管理</a></li>
+      <li><a href="/admin/students">學生管理</a></li>
+      <li><a href="/admin/teachers">老師管理</a></li>
+      <li><a href="/admin/admin_chat">信箱</a></li> 
+      <li><a href="/admin/logout">登出</a></li>
+    </ul>
+  </div>
+</section>
+    <div class="container">
+
+<div class="form-group col-md-8" >
+    
+  <div class="container col-md-8">
+
+<% contactbook.forEach(function(contactbook){ id=contactbook.id,grade=contactbook.grade, category = contactbook.category, content=contactbook.content,
+        post_user=contactbook.post_user, post_date=contactbook.post_date, notification=contactbook.notification}); %>
+  
+  <div class="col-md-12 text-left">
+    <% if(currentAuth == "1") { %>
+  <form action="/admin/deleteContactbook" method="POST">
+    <input hidden type="text" name="contactbook_id" value="<%=id%>"/>
+    <input style="margin-bottom:10px" type="submit" value="刪除" class="btn btn-default btn-danger" />
+  </form>
+  <% } %>
+  </div>
+        
+<form role="form" action="/admin/editPost_contactbook" method="POST">
+  
+  <div hidden class="form-group col-md-6">
+    <label for="id"></label>
+    <input type="text" class="form-control" name="contactbook_id" value="<%=id%>" >
+  </div>
+  
+  <div class="form-group">
+    <label for="classname">班級名稱</label>
+          
+            <select class="form-control" name="classname">
+                  <% classlist.forEach(function(allClass){ %>
+                  <% if(grade==allClass.grade && category==allClass.category) { %>
+                     <option selected value="<%=allClass.grade %><%=allClass.category %>"><%=allClass.grade %><%=allClass.category %></option> 
+                     <% } else if(grade!=allClass.grade || category!=allClass.category) { %>
+                     <option value="<%=allClass.grade %><%=allClass.category %>"><%=allClass.grade %><%=allClass.category %></option> 
+                     <% } %>
+                  <% }); %>
+                </select>
+   </div>
+  
+ <!--<div class="form-group col-md-12">-->
+ <!--   <label for="title_contactbookDate">標題</label>-->
+ <!--   <input type="text" class="form-control" name="title_contactbookDate" value="">-->
+ <!-- </div>-->
+
+  <div class="form-group col-md-12">
+    <label for="content">內容</label>
+    <textarea class="form-control" rows="10" name="content"><%=content%></textarea>
+  </div>
+  
+  <div class="form-group col-md-6">
+    <label for="post_user">發佈人</label>
+    <input type="text" class="form-control" name="post_user" value="<%=post_user%>" >
+  </div>
+  <div class="form-group col-md-6">
+    <% var date = new Date(); %>
+    <!--<label for="post_date">發佈日期</label>-->
+   <input hidden type="text" id="date" placeholder="2099/01/31" name="post_date" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日">
+  </div>
+  
+  <div class="form-group col-md-6">
+    <!--<label for="notification">推播通知</label>-->
+    <input type="checkbox" class="form-control" name="notification"><p>是否傳送推撥通知</p>
+  </div>
+
+  <div class="col-md-12 text-right">
+    
+    <button type="submit" class="btn btn-primary">更新</button>
+    
+    <a href="/admin/contactbook"><button type="button" class="btn btn-default">取消</button></a>
+    
+  </div>
+
+</form>
+  
+</div>
+  </div>
+
+
+    </div>
+
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+  if(<%=notification%>) {
+    document.querySelector('input[type=checkbox]').checked = true;
+  } else {
+    document.querySelector('input[type=checkbox]').checked = false;
+  }
+</script>
+</body>
+</html>
+
+

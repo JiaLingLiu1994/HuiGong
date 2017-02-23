@@ -1,0 +1,83 @@
+h2 { 
+  background-color: #d1d1d1;
+  padding: 15px;
+  margin-bottom: 1em;
+}
+.container { margin-top: 1em }
+.navbar-form { padding: 0; margin-right: 1em }
+#newaccount { margin-top: 8px }
+
+/*.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+  background-color: #066;
+}*/
+.table { 
+  margin: 0 ;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.table.table-bordered {
+  padding: 1em;
+
+}
+
+.table-bordered th {
+  cursor: pointer;
+
+}
+
+.table-bordered .caret {
+  top: 10px;
+  right: 5px;
+  float: right;
+  /*color: #bfbfc1;*/
+}
+
+.info_table {
+  width: 500px;
+}
+
+#panel2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    left: 230px;
+    height: 80%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #fefefe;
+    margin: 5% auto;
+    width: 80%; /* Could be more or less, depending on screen size */
+
+
+}
+
+#panel3 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 100px;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+
+
+
+}
+
+.container {
+ 	width: 800px;
+ 	margin-top: 30px;
+ 	margin-left: 200px;
+ 	padding-bottom: 20px;
+ 	
+ 
+}
+
+.btn-new {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 100px;
+}
+
+
+

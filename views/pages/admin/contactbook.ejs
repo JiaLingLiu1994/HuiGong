@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <% include ../../partials/admin_header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/contactbook.css">
+    
+</head>
+
+<body>
+
+<section id="sidebar"> 
+  <div class="white-label">
+  </div> 
+  <div id="sidebar-nav">   
+    <ul>
+     <li><a href="/admin/post"></i>貼文管理</a></li>
+     <li class="active"><a href="/admin/contactbook"></i>聯絡簿管理</a></li>
+     <li><a href="/admin/classManager"></i>班級管理</a></li>
+     <li><a href="/admin/students">學生管理</a></li>
+     <li><a href="/admin/teachers">老師管理</a></li>
+     <li><a href="/admin/admin_chat">信箱</a></li>   
+     <li><a href="/admin/logout">登出</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="content">
+<div id="newPostModal" class="newPostModal">
+     <!-- Modal content -->
+      <div class="newPostModal-content">
+         <span class="close">x</span>
+           <a id="btn-back" style="margin-bottom:20px" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"> 返回</span></a>
+
+          <form action="/admin/contactbook" method="POST">
+           <div class="form-group">
+            <label for="classname">班級名稱</label>
+          
+            <select class="form-control" name="classname">
+                  <%　classlist.forEach(function(allClass){ %>
+                     <option  value="<%=allClass.grade %><%=allClass.category %>"><%=allClass.grade %><%=allClass.category %></option> 
+                  <% }); %>
+                </select>
+          </div>
+          <!--<div class="form-group">-->
+          <!-- <label for="grade">年級</label>-->
+          <!--   <input type="text" class="form-control" id="grade" name="grade">-->
+          <!--</div>-->
+          
+          <!--<div class="form-group">-->
+          <!-- <label for="category">班別</label>-->
+          <!--   <input type="text" class="form-control" id="category" name="category">-->
+          <!--</div>-->
+
+          <div class="form-group">
+           <label for="content">內容</label>
+           <textarea class="form-control" rows="10" name="content"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image">選擇圖片</label>
+            <input type="file" id="image">
+          </div>
+
+          <div class="form-group">
+           <label for="Name">發佈人：</label>
+           <input type="text"  id="name" name="post_user">
+           
+            <!--<label for="date">日期：</label>-->
+            <% var date = new Date(); %>
+           <input hidden type="text" id="date" placeholder="2099/12/31" name="post_date" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日">
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="notification">是否傳送推撥通知
+            </label>
+          </div>
+         <button name="post_btn" type="submit" class="btn btn-primary">確定發佈</button>
+        </form>
+      </div>
+    </div>
+</section>
+
+    <div class="container">
+
+     <a id="btn-new" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> 新增文章</span></a>
+     <!-- The Modal -->
+
+      <h1>聯絡簿列表</h1>
+      <ul class="list">
+       <% contactbook.forEach( function( contactbook ){ %>
+     <!--  if u want to delete item , use <span class="delete"><i class="fa fa-trash"></i></span> -->
+        <li class="contactbookItem">
+        <%= contactbook.grade %><%= contactbook.category %> <%= contactbook.post_date %>
+        <form hidden id="<%= contactbook.id %>" action="/admin/editPost_contactbook" method="GET">
+            <input hidden type="text" name="contactbook_id" value="<%= contactbook.id %>" />
+            <input hidden type="submit" value="" />
+        </form>
+        
+        <span id="<%= contactbook.id %>" class="modify"><i class="fa fa-pencil-square-o"></i></span>
+        </li>
+       <% }); %>
+      </ul>
+    </div>
+
+<% include ../../partials/admin_scripts.ejs %>
+<script type="text/javascript" src="/stylesheets/js/contactbookPage.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html >
+<html >
+<head>
+  <% include ../partials/header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/class.css">
+
+</head>
+<body>
+
+  <% include ../partials/nav.ejs %>
+
+<div class="full-width">
+    
+<!--     <div class='cf'>
+      <div class="Switch card">
+        <div class="Toggle"></div>
+        <span class="on"><i class="fa fa-th"></i></span>
+        <span class="off"><i class="fa fa-th-list"></i></span>
+      </div>
+    </div> -->
+      
+    <div class="col-md-3">
+
+    <% contactbook.forEach( function( contactbook ){ %>
+      <%　insideClasslist.forEach(function(insideClasslist) { %>
+       <% if(insideClasslist.className==contactbook.grade+contactbook.category){ %>
+      <div class="card-view">
+        <div class="container">
+          <div class="tag_name"><%= contactbook.grade %><%= contactbook.category %></div>
+            <div class="c_content">
+              <div class="post_name"><p>今日作業</p></div>
+              <br>
+              <p><%= contactbook.content %></p>
+            </div>
+
+          <div class="teacher">
+            
+            <div class="teacher_info">
+              
+              <div class="teacher_name"><%= contactbook.post_user %> • <%= contactbook.contactdate %></div>
+              <div class="teacher_avatar">
+                <img  src="img/logo.png">
+              </div>
+            </div>
+          </div> <!-- end .user -->
+        </div> <!-- end .container -->
+      </div> <!-- end card -->
+      <% } %>
+     <% }); %>
+    <% }); %>
+
+    </div> <!-- end col-md-3 -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/4d5ece1593.js"></script>
+
+</body>
+
+</html>

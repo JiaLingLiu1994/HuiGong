@@ -1,9 +1,27 @@
+<!DOCTYPE html >
+<html >
+<head>
+
+	<title>惠功文理補習班</title>
+	<meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/header.css">
+  <link rel="stylesheet" type="text/css" href="css/footer.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700|Oswald' rel='stylesheet' type='text/css'>
+	<script src="https://use.fontawesome.com/fe2c6890d9.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <!-- <script type="text/javascript" src="modal.js"></script> -->
+</head>
+
+<body>
+
 <nav class="navheight navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <a class="navbar-brand" href="/">
-        <img id="logo" alt="Brand" src="/logo.png">
+        <img id="logo" alt="Brand" src="img/logo.png">
       </a>
       <button type="button" class="navheight navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -47,3 +65,37 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+<div class="form-group col-md-12" >
+    <form>
+        <div class="container">
+<div class="row">
+<div class="col-sm-12">
+</div>
+</div>
+<div class="row">
+<div class="col-sm-6 col-sm-offset-3">
+<form method="POST" action="/profile_reset">
+<input type="password" class="input-lg form-control" name="password1" placeholder="輸入新密碼" autocomplete="off">
+<input type="password" class="input-lg form-control" name="password2" placeholder="再輸入一次新密碼" autocomplete="off">
+<div class="row">
+<div class="col-sm-12">
+</div>
+</div>
+<button type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" >更改密碼</button>
+
+</form>
+</div><!--/col-sm-6-->
+</div><!--/row-->
+</div>
+    </form>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.4.0/velocity.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/4d5ece1593.js"></script>
+
+
+</body>
+
+</html>
