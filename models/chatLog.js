@@ -11,4 +11,4 @@ var chatLogSchema = new mongoose.Schema({
     message: String
 });
 
-module.exports = mongoose.model('chat-log', chatLogSchema);
+module.exports = mongoose.model('chat_log', chatLogSchema);

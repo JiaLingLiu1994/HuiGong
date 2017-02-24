@@ -1,0 +1,19 @@
+.container {
+ 	width: 800px;
+ 	margin-top: 30px;
+ 	margin-left: 200px;
+ 	padding-bottom: 20px;
+	position: fixed;
+ 
+}
+
+.deleteBtn {
+	float: right;
+	margin-right: 220px;
+	margin-top: -46.8px;
+}
+
+#btn-new {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
