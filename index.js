@@ -3,14 +3,15 @@ var express               = require('express'),
 	bodyParser            = require('body-parser'),
 	passport              = require('passport'),
 	LocalStrategy         = require("passport-local"),
-	passportLocalMongoose = require("passport-local-mongoose");
+	passportLocalMongoose = require("passport-local-mongoose")
+  http                  = require('http');
 
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 var server = require('http').Server(app); 
-server.listen(5000, function(){
-	console.log("port #" + 5000);   //change 5000 to process.env.PORT when it runs on Heroku
+server.listen(process.env.PORT || 5000 , function(){
+	console.log("port #" + 5000 );   //change 5000 to process.env.PORT when it runs on Heroku
 });
 
 var io = require('socket.io')(server);
@@ -18,9 +19,9 @@ var io = require('socket.io')(server);
 var mongooseOptions = { server: { socketOptions: { keepAlive: 1,
 	connectTimeoutMS: 30000 }}, replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }}};
 
-var mongodbURL = 'mongodb://127.0.0.1/db';
+// var mongodbURL = process.env.MONGOLAB_URI_HUIGONG;
 
-mongoose.connect(mongodbURL, mongooseOptions);
+mongoose.connect(process.env.MONGOLAB_URI_HUIGONG, mongooseOptions);
 
 var conn = mongoose.connection;
 
