@@ -3,21 +3,21 @@ var express               = require('express'),
 	bodyParser            = require('body-parser'),
 	passport              = require('passport'),
 	LocalStrategy         = require("passport-local"),
-	passportLocalMongoose = require("passport-local-mongoose")
-  http                  = require('http');
+	passportLocalMongoose = require("passport-local-mongoose");
 
 var app = express();
 
-app.set('port', (process.env.PORT || 5000));
+// app.set('port', (process.env.PORT || 5000));
+var port = process.env.PORT || 5000;
 var server = require('http').Server(app); 
-server.listen(process.env.PORT || 5000 , function(){
+server.listen(port , function(){
 	console.log("port #" + 5000 );   //change 5000 to process.env.PORT when it runs on Heroku
 });
 
 var io = require('socket.io')(server);
 
-var mongooseOptions = { server: { socketOptions: { keepAlive: 1,
-	connectTimeoutMS: 30000 }}, replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }}};
+var mongooseOptions = { server: { socketOptions: { keepAlive: 300000,
+	connectTimeoutMS: 30000 }}, replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 }}};
 
 // var mongodbURL = process.env.MONGOLAB_URI_HUIGONG;
 
@@ -25,10 +25,7 @@ mongoose.connect(process.env.MONGOLAB_URI_HUIGONG, mongooseOptions);
 
 var conn = mongoose.connection;
 
-conn.on('error', function(){
-	console.error("MONGO ERROR!");
-	console.error.bind(console, 'MongoDB connection error:');
-});
+conn.on('error', console.error.bind(console, "MONGO ERROR:"));
 
 conn.once('open', function() {
     console.log('MongoDB connection openned');
