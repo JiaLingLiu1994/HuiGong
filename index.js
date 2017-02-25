@@ -588,7 +588,7 @@ app.get("/admin/teachers", isAdminLoggedIn, function(req, res){
       if(currentAuth == "1"){
         res.render("pages/admin/teachers", {"teacher": teachers});
       } else {          
-        res.redirect("pages/admin/post");
+        res.redirect("/admin/post");
       }
     }
   });
