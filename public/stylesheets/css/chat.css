@@ -417,6 +417,7 @@ html, body {
     border-radius: 50%;
     float: left;
     margin-right: 10px;
+    margin-top: 8px;
 }
 
 #sidepanel #contacts ul li.contact .wrap .meta {
@@ -608,7 +609,7 @@ html, body {
     position: relative;
 }
 
-.content .message-input .wrap input {
+.content .message-input .wrap textarea {
     font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
     float: left;
     border: none;
@@ -618,7 +619,7 @@ html, body {
     color: #32465a;
 }
 
-.content .message-input .wrap input:focus {
+.content .message-input .wrap textarea:focus {
     outline: none;
 }
 

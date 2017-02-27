@@ -5,6 +5,8 @@ var express               = require('express'),
 	LocalStrategy         = require("passport-local"),
 	passportLocalMongoose = require("passport-local-mongoose");
 
+// require('./public/stylesheets/message')(app);
+
 var app = express();
 
 // app.set('port', (process.env.PORT || 5000));
@@ -20,7 +22,7 @@ var mongooseOptions = { server: { socketOptions: { keepAlive: 300000,
 	connectTimeoutMS: 30000 }}, replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 }}};
 
 // var mongodbURL = process.env.MONGOLAB_URI_HUIGONG;
-
+mongoose.Promise = require('bluebird');
 mongoose.connect(process.env.MONGOLAB_URI_HUIGONG, mongooseOptions);
 
 var conn = mongoose.connection;
@@ -31,8 +33,7 @@ conn.once('open', function() {
     console.log('MongoDB connection openned');
 });
 
-var OnlineChatters  = require('./models/onlineChatters'),
-    ChatLog         = require('./models/chatLog'),
+var messages        = require('./models/message'),
     articles        = require("./models/article"),
     classList       = require("./models/classlist"),
     studentList     = require("./models/studentlist"),
@@ -86,11 +87,11 @@ app.get("/class", isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         } else {
-            insideClassList.find({username:req.user.username}, function(err, insideClasslist) {
+            insideClassList.find({username: req.user.username}, function(err, insideClasslist) {
                 if(err) {
                     console.log(err);
                 } else {
-                    studentList.update({username:req.user.username},
+                    studentList.update({username: req.user.username},
                     {$set:
                       {
                         last_login: date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate()
@@ -112,9 +113,35 @@ app.get("/class", isLoggedIn, function(req, res){
 
 // user chatting room
 app.get("/chat", isLoggedIn, function(req, res){
-    res.redirect("/");
-    console.log("user chatting room");
-    // res.render("chat",{"currentUser":req.user});
+  teacherList.find({}, null, { sort:{_id: -1}}, function(err, teacherlist){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("pages/chat", {"currentUser": req.user, "teacherlist": teacherlist, "thefisrtonTop": teacherlist[0]});
+    }
+  });
+});
+
+app.post("/chat", function(req, res) {
+  messages.create(
+  {
+    body: req.body.content,
+    userFrom: req.user.id,
+    userTo: req.body.receiverId,
+    userFromName: req.user.username,
+    userToName: req.body.receiverName,
+    timestamp: req.body.timestamp    
+  }, function(err, message) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("SUCCESS ADD THE MESSAGE");
+      res.redirect("/chat");
+    }
+  }) 
+    
+
+  
 });
 
 // users login
@@ -138,10 +165,70 @@ app.get("/profile", function(req, res) {
           if (currentUser == null)
             console.log("Login first to check your contactbook details");
           else
-            res.render("profile", {"currentUser": currentUser, "student": studentlist});
+            res.render("pages/profile", {"currentUser": currentUser, "student": studentlist});
         }
     });
    
+});
+
+app.get("/profile_update", isLoggedIn, function(req, res) {
+  studentList.find({username: req.user.username}, function(err, students){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("pages/profile_update", {"student": students, "currentUser": req.user});
+    }
+  });
+});
+
+app.post("/profile_update", function(req, res){
+    studentList.update({username:req.user.username},
+    {$set:
+     { name:req.body.student_name,
+      student_phone: req.body.student_phone,
+      father_name: req.body.fa_name,
+      father_phone: req.body.fa_phone,
+      mother_name: req.body.ma_name,
+      mother_phone: req.body.ma_phone,
+      home_phone:req.body.home_phone}
+    },function(err, studentlist){
+      if(err){
+          console.log(err);
+      } else {
+          console.log("success update profile");
+          console.log(studentlist);
+          res.redirect("/profile");
+      }
+       
+    });
+});
+        
+app.get("/profile_reset",isLoggedIn, function(req, res) {
+  User.find({username:req.user.username}, function(err, students){
+    if(err){
+      console.log(err);
+    } else {
+      res.render("pages/profile_reset", {"currentUser": req.user});
+    }
+  });
+});
+
+app.post("/profile_reset", function(req, res) {
+  console.log("123:"+req.body.password1);
+  console.log(req.body.password2);
+  if(req.body.password1 == req.body.password2) {
+    User.update({username:req.user.username}, req.body.password1,function(err, user) {
+      if(err) {
+        console.log(err);
+      }else {
+        console.log("success");
+        res.redirect("/profile");
+      }
+    })
+  } else {
+    console.log("fail");
+    res.redirect("/profile_reset");
+  }
 });
 
 // admin login
