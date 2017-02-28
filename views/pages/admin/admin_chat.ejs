@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>信箱</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" type="text/css" href="css/admin.css">-->
-    <link rel="stylesheet" type="text/css" href="css/admin_chat.css">
+
+    <% include ../../partials/admin_header.ejs %>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/admin_chat.css">
+
 </head>
 <body>
 <section id="sidebar"> 
@@ -17,7 +15,7 @@
       <li><a href="/admin/classManager"></i>班級管理</a></li>
       <li><a href="/admin/students">學生管理</a></li>
     <li><a href="/admin/teachers">老師管理</a></li>
-      <li class="active"><a href="/admin/admin_chat">信箱</a></li>  
+      <li class="active"><a href="/admin/admin_chat/58b3361d2913430004e311ec">信箱</a></li>  
       <li><a href="/admin/logout">登出</a></li>
     </ul>
   <!-- </div> -->
@@ -33,176 +31,18 @@
 
         <div id="contacts">
             <ul class="sidepanel_contact">
-                <li class="contact">
+
+            <% studentlist.forEach( function( studentlist ){ %>
+                <li class="contact" id='<%= studentlist.id %>'>
                     <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                        <img src="/blankuser.jpg" alt="" />
                         <div class="meta">
-                            <p class="name">黃小明</p>
+                            <p class="name"><%= studentlist.name %></p>
                             <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
                         </div>
                     </div>
                 </li>
-                <li class="contact active">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">王小明</p>
-                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jonathan Sidwell</p>
-                            <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jonathan Sidwell</p>
-                            <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jonathan Sidwell</p>
-                            <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
-                        </div>
-                    </div>
-                </li>
+            <% }); %>    
             </ul>
         </div>
         <!-- <div id="bottom-bar">
@@ -215,15 +55,15 @@
     <div class="col-md-9 col-xs-8">
     <div class="content">
         <div class="contact-profile">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>王小明</p>
+            <img src="/blankuser.jpg" alt="" />
+            <p><%= chatWith.name %></p>
             <!-- <div class="social-media">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
                 <i class="fa fa-twitter" aria-hidden="true"></i>
                 <i class="fa fa-instagram" aria-hidden="true"></i>
             </div> -->
         </div>
-        <div class="messages">
+        <div class="messages" id="autoFreshMsg">
             <ul class="msg_area">
                 <li class="sent">
                     <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
@@ -261,9 +101,24 @@
         </div>
         <div class="message-input">
             <div class="wrap">
-                <input type="text" placeholder="回覆..." />
+            <form name='msgform' action="/admin/admin_chat" method="POST">
+                <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
+
+                <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.username%>" >
+
+                <input type="hidden" name="userId" id="userId" class="form-control" value="<%= currentUser.id%>" >
+                
+                <input type="hidden" name="userName" id="userName" class="form-control" value="<%= currentUser.username%>" >
+
+                <% var date = new Date(); %>
+                <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
+
+                <textarea class="form-control" rows="1" name="content" placeholder="輸入訊息..."></textarea>
+
                 <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                <button class="sendBtn" id="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                <input hidden type="submit" name="sendmessage" id="sendmessage" />
+            </form>    
             </div>
         </div>   
     </div>
@@ -271,8 +126,8 @@
   </div>
 </section>
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/admin_chat.js"></script>
+    <% include ../../partials/admin_scripts.ejs %>
+    <script type="text/javascript" src="/stylesheets/js/admin_chatroom.js"></script>
+
 </body>
 </html>

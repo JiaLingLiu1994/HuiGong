@@ -3,11 +3,11 @@
 <head>
 	<title>惠功文理補習班--聯絡我們</title>
 	<meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/chat.css">
-    <link rel="stylesheet" type="text/css" href="css/header.css">
-    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="icon" href="/logo.PNG">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/chat.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/css/footer.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700|Oswald' rel='stylesheet' type='text/css'>
 	<script src="https://use.fontawesome.com/fe2c6890d9.js"></script>
 	
 </head>
@@ -25,157 +25,72 @@
 
         <div id="contacts">
             <ul class="sidepanel_contact">
-                <li class="contact">
+
+            <% teacherlist.forEach( function( teacherlist ){ %>
+                <li class="contact" id='<%= teacherlist.id %>'>
                     <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                        <a href="/chat/<%= teacherlist.id %>">
+                        <img src="/blankuser.jpg" alt="" />
                         <div class="meta">
-                            <p class="name">Louis Litt</p>
-                            <p class="preview">You just got LITT up, Mike.</p>
+                            <p class="name"><%= teacherlist.name %></p>
+                            <p class="preview">pre msg</p>
                         </div>
+                        </a>
                     </div>
                 </li>
-                <li class="contact active">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Harvey Specter</p>
-                            <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Rachel Zane</p>
-                            <p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Donna Paulsen</p>
-                            <p class="preview">Mike, I know everything! I'm Donna..</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jessica Pearson</p>
-                            <p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Harold Gunderson</p>
-                            <p class="preview">Thanks Mike! :)</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Daniel Hardman</p>
-                            <p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Katrina Bennett</p>
-                            <p class="preview">I've sent you the files for the Garrett trial.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Charles Forstman</p>
-                            <p class="preview">Mike, this isn't over.</p>
-                        </div>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="wrap">
-                        <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                        <div class="meta">
-                            <p class="name">Jonathan Sidwell</p>
-                            <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
-                        </div>
-                    </div>
-                </li>
+            <% }); %>
             </ul>
         </div>
-        <!-- <div id="bottom-bar">
-            <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
-            <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
-        </div> -->
     </div>
     </div>
 
     <div class="col-md-9 col-xs-8 right">
     <div class="content">
+
         <div class="contact-profile">
-            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-            <p>Harvey Specter</p>
-            <!-- <div class="social-media">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-            </div> -->
+            <img src="/blankuser.jpg" alt="" />
+            <p> <%= chatWith.name %></p>
         </div>
-        <div class="messages">
+
+        <% chats.forEach( function( chats ){ %>
+        <div class="messages" id='autoFreshMsg'>
             <ul class="msg_area">
+            <% if (chats.userFrom == currentUser.id) {%> 
                 <li class="sent">
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                    <p>請問今日我小孩在補習班的表現如何？</p>
+                    <img src="/blankuser.jpg" alt="" />
+                    <p><%= chats.body %></p>
                 </li>
+            <% } %>
+            <% if (chats.userFrom == chatWith.id) {%> 
                 <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>他今天放學之後很準時的還上課，上課表現也很優良</p>
+                    <img src="/blankuser.jpg" alt="" />
+                    <p><%= chats.body %></p>
                 </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度</p>
-                </li>
-                <li class="sent">
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                    <p>Oh yeah, did Michael Jordan tell you that?</p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>No, I told him that.</p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>What are your choices when someone puts a gun to your head?</p>
-                </li>
-                <li class="sent">
-                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                    <p>What are you talking about? You do what they say or they shoot you.</p>
-                </li>
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                </li>
+            <% } %>    
             </ul>
         </div>
+        <% }); %>
+
         <div class="message-input">
             <div class="wrap">
-                <input type="text" placeholder="Write your message..." />
+            <form name='msgform' action="/chat/<%= chatWith.id%>" method="POST">
+                <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
+
+                <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.name%>" >
+
+                <input type="hidden" name="userId" id="userId" class="form-control" value="<%= currentUser.id%>" >
+                
+                <input type="hidden" name="userName" id="userName" class="form-control" value="<%= currentUser.username%>" >
+
+                <% var date = new Date(); %>
+                <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
+                
+                <textarea class="form-control" rows="1" name="content" id="msg_body" placeholder="輸入訊息..."></textarea>
+                
                 <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                <button class="sendBtn" id="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                <input hidden type="submit" name="sendmessage" id="sendmessage" />
+            </form>    
             </div>
         </div>   
     </div>
@@ -185,7 +100,8 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/4d5ece1593.js"></script>
-<script type="text/javascript" src="js/chat.js"></script>
+<!-- <script type="text/javascript" src="/stylesheets/js/chat.js"></script> -->
+<script type="text/javascript" src="/stylesheets/js/chatroom.js"></script>
 
 </body>
 </html>

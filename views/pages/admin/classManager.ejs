@@ -16,7 +16,7 @@
      <li class="active"><a href="/admin/classManager"></i>班級管理</a></li>
      <li><a href="/admin/students">學生管理</a></li>
      <li><a href="/admin/teachers">老師管理</a></li>
-     <li><a href="/admin/admin_chat">信箱</a></li>     
+     <li><a href="/admin/admin_chat/58b3361d2913430004e311ec">信箱</a></li>     
      <li><a href="/admin/logout">登出</a></li>
     </ul>
   </div>
@@ -35,7 +35,7 @@
     		      <h5>時間：<%= Class.class_day %></h5>
     		    	<h5>時段：<%= Class.class_time %></h5>
     		    	<h6>授課老師：<%= Class.teacher %></h6>
-    		    	<form action="/admin/insideClass" method="GET">
+    		    	<form action="/admin/insideClass/" method="GET">
     		  
               <input hidden type="text" name="classname" value="<%= Class.grade %><%= Class.category %>" />
               <input type="submit" value="查看" class="btn btn-default" />

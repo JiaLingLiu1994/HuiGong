@@ -336,7 +336,7 @@ html, body {
 #sidepanel #contacts {
     /*position: absolute;*/
     /*height: 100%;*/
-    width: 100%;
+    width: 105%;
     /*height: auto;*/
     /*height: 500px;*/ /*try*/
     height: 84vh;
@@ -357,6 +357,10 @@ html, body {
 
 .sidepanel_contact {
     padding: 0px 0 0px 0;
+}
+
+#sidepanel #contacts ul {
+
 }
 
 #sidepanel #contacts ul li.contact {
@@ -388,8 +392,14 @@ html, body {
 
 #sidepanel #contacts ul li.contact .wrap {
     width: 88%;
+    margin-right: 10px;
     margin: 0 auto;
     position: relative;
+}
+
+#sidepanel #contacts ul li.contact .wrap a:hover {
+    text-decoration: none;
+    -moz-text-decoration: none;
 }
 
 /*#frame #sidepanel #contacts ul li.contact .wrap span {

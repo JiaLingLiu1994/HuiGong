@@ -3,7 +3,8 @@ var express               = require('express'),
 	bodyParser            = require('body-parser'),
 	passport              = require('passport'),
 	LocalStrategy         = require("passport-local"),
-	passportLocalMongoose = require("passport-local-mongoose");
+	passportLocalMongoose = require("passport-local-mongoose"),
+	async 				  = require("async");
 
 // require('./public/stylesheets/message')(app);
 
@@ -46,7 +47,7 @@ var currentClass = "";
 var currentClassId = "";
 var currentTeacher = "undefined";
 var currentAuth = "";
-var currentUser = "";
+// var currentUser = "";
 var date = new Date();
 
 app.use(express.static(__dirname + '/public'));
@@ -112,23 +113,52 @@ app.get("/class", isLoggedIn, function(req, res){
 });
 
 // user chatting room
-app.get("/chat", isLoggedIn, function(req, res){
-  teacherList.find({}, null, { sort:{_id: -1}}, function(err, teacherlist){
-    if(err){
+// app.get("/chat", isLoggedIn, function(req, res){
+//   teacherList.find({}, null, { sort:{_id: -1}}, function(err, teacherlist){
+//   	teacherList.find({username: 'superuser'}, function(err, superuser){
+//     	if(err){
+//       		console.log(err);
+//     	} else {
+//       		res.render("pages/chat", {"currentUser": req.user, "thefisrtonTop": superuser, "teacherlist": teacherlist});
+//     	}
+//   	});
+//   });	
+// });
+
+app.get("/chat/:id", isLoggedIn, function(req, res){
+	async.parallel([
+  	function(callback){
+  		teacherList.find({}, null, { sort:{_id: 1}}, function(err, teacherlist){
+  			callback(err, teacherlist);
+  		});
+  	},
+  	function(callback){
+  		teacherList.findById({'_id': req.params.id}, function(err, chatWith){
+  			callback(err, chatWith);
+  		});
+  	},
+  	function(callback){
+  		messages.find({'$or': [{'userFrom': req.user._id, 'userTo': req.params.id},
+  		{'userFrom': req.params.id, 'userTo': req.user._id}]}, function(err, filteredmessages){
+  			callback(err, filteredmessages);
+  		}, null, { sort: {timestamp: 1}});	
+  	}
+  ], function(err, results){
+  	if(err){
       console.log(err);
     } else {
-      res.render("pages/chat", {"currentUser": req.user, "teacherlist": teacherlist, "thefisrtonTop": teacherlist[0]});
+      res.render("pages/chat", {"currentUser": req.user, "teacherlist": results[0], "chatWith": results[1], "chats": results[2]});
     }
   });
 });
 
-app.post("/chat", function(req, res) {
+app.post("/chat/:id", function(req, res) {
   messages.create(
   {
     body: req.body.content,
-    userFrom: req.user.id,
+    userFrom: req.body.userId,
     userTo: req.body.receiverId,
-    userFromName: req.user.username,
+    userFromName: req.body.userName,
     userToName: req.body.receiverName,
     timestamp: req.body.timestamp    
   }, function(err, message) {
@@ -136,12 +166,9 @@ app.post("/chat", function(req, res) {
       console.log(err);
     } else {
       console.log("SUCCESS ADD THE MESSAGE");
-      res.redirect("/chat");
+      res.redirect("/chat/:id");
     }
   }) 
-    
-
-  
 });
 
 // users login
@@ -156,16 +183,12 @@ app.post("/login",passport.authenticate("local", {
 });
 
 //users' profile
-app.get("/profile", function(req, res) {
-    currentUser = req.user.username;
-    studentList.find({username: currentUser}, function(err, studentlist) {
+app.get("/profile", isLoggedIn, function(req, res) {
+    studentList.find({username: req.user.username}, function(err, studentlist) {
         if(err) {
             console.log(err);
         } else {
-          if (currentUser == null)
-            console.log("Login first to check your contactbook details");
-          else
-            res.render("pages/profile", {"currentUser": currentUser, "student": studentlist});
+            res.render("pages/profile", {"currentUser": req.user.username, "student": studentlist});
         }
     });
    
@@ -763,17 +786,64 @@ app.post("/admin/deleteTeacher", function(req, res) {
 });
 
 // admin chatting room
-app.get("/admin/admin_chat", isAdminLoggedIn, function(req, res){
-    res.redirect("/admin/post");
-    console.log("chat");
-    // res.render("admin/admin_chat");
+app.get("/admin/admin_chat/:id", isAdminLoggedIn, function(req, res){
+	async.parallel([
+  	function(callback){
+  		studentList.find({}, null, { sort:{_id: 1}}, function(err, studentlist){
+  			callback(err, studentlist);
+  		});
+  	},
+  	function(callback){
+  		studentList.findById({'_id': req.params.id}, function(err, chatWith){
+  			callback(err, chatWith);
+  		});
+  	},
+  	function(callback){
+  		messages.find({'$or': [{'userFrom': req.user._id, 'userTo': req.params.id},
+  		{'userFrom': req.params.id, 'userTo': req.user._id}]}, function(err, filteredmessages){
+  			callback(err, filteredmessages);
+  		}, null, { sort: {timestamp: 1}});	
+  	},
+  	function(callback){
+  		messages.find({'$or': [{'userFrom': req.user._id}, {'userTo': req.user._id}]}, function(err, filteredEachLastmessages){
+  			callback(err, filteredEachLastmessages);
+  		}, null, { sort: {timestamp: 1}});	
+  	}
+
+  ], function(err, results){
+  	if(err){
+      console.log(err);
+    } else {
+      res.render("pages/admin/admin_chat", {"currentUser": req.user, "studentlist": results[0], "chatWith": results[1], "chats": results[2]});
+    }
+  });
 });
 
+app.post("/admin/admin_chat", function(req, res) {
+  messages.create(
+  {
+    body: req.body.content,
+    userFrom: req.body.userId,
+    userTo: req.body.receiverId,
+    userFromName: req.body.userName,
+    userToName: req.body.receiverName,
+    timestamp: req.body.timestamp    
+  }, function(err, message) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("SUCCESS ADD THE MESSAGE");
+    }
+  }) 
+});
+
+// user logout
 app.get("/logout", function(req, res) {
    req.logout();
    res.redirect("/");
 });
 
+// admin logout
 app.get("/admin/logout", function(req, res) {
    req.logout();
     currentTeacher = "undefined";
