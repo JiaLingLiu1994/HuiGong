@@ -35,13 +35,11 @@
             <% studentlist.forEach( function( studentlist ){ %>
                 <li class="contact" id='<%= studentlist.id %>'>
                     <div class="wrap">
-                    <a href="/admin/admin_chat/<%= studentlist.id %>">
                         <img src="/blankuser.jpg" alt="" />
                         <div class="meta">
                             <p class="name"><%= studentlist.name %></p>
-                            <p class="preview">pre view</p>
+                            <p class="preview">今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度.</p>
                         </div>
-                    </a>    
                     </div>
                 </li>
             <% }); %>    
@@ -65,22 +63,52 @@
                 <i class="fa fa-instagram" aria-hidden="true"></i>
             </div> -->
         </div>
-
-         <div class="message-input">
+        <div class="messages" id="autoFreshMsg">
+            <ul class="msg_area">
+                <li class="sent">
+                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                    <p>請問今日我小孩在補習班的表現如何？</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>他今天放學之後很準時的還上課，上課表現也很優良</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>今日有回家作業，請家長提醒學生至聯絡簿檢查作業進度</p>
+                </li>
+                <li class="sent">
+                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                    <p>Oh yeah, did Michael Jordan tell you that?</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>No, I told him that.</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>What are your choices when someone puts a gun to your head?</p>
+                </li>
+                <li class="sent">
+                    <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                    <p>What are you talking about? You do what they say or they shoot you.</p>
+                </li>
+                <li class="replies">
+                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+                </li>
+            </ul>
+        </div>
+        <div class="message-input">
             <div class="wrap">
             <form name='msgform' action="/admin/admin_chat" method="POST">
                 <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
 
                 <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.username%>" >
 
-                <% theUser.forEach(function(theUser){ %>
-
-                <input type="hidden" name="userId" id="userId" class="form-control" value="<%= theUser.id%>" >
+                <input type="hidden" name="userId" id="userId" class="form-control" value="<%= currentUser.id%>" >
                 
-
-                <input type="hidden" name="userName" id="userName" class="form-control" value="<%= theUser.username%>" >
-                
-                <% })%>
+                <input type="hidden" name="userName" id="userName" class="form-control" value="<%= currentUser.username%>" >
 
                 <% var date = new Date(); %>
                 <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
@@ -93,24 +121,6 @@
             </form>    
             </div>
         </div>   
-
-        <% chats.forEach( function( chats ){ %>
-        <div class="messages" id="autoFreshMsg">
-            <ul class="msg_area">
-            <% if (chats.userFrom == chatWith.id) { %>     
-                <li class="replies">
-                    <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                    <p><%= chats.body %></p>
-                </li>
-            <% } else { %>  
-                <li class="sent">
-                    <img src="/blankuser.jpg" alt="" />
-                    <p><%= chats.body %></p>
-                </li>
-            <% } %>    
-            </ul>
-        </div>
-        <% }); %>
     </div>
     </div>
   </div>

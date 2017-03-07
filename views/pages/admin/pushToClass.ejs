@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>傳送推播通知到班級</title>
+ <% include ../../partials/admin_header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/post_admin.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+ 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+ 
+          <!-- Angular Material Library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+ 
+ 
+</head>    
+<body>
+   
+    <section id="content">
+        <div class="container">
+            <a href="/admin/push" class="btn btn-default btn-primary" type="button" style="margin-top:20px;color:white;margin-bottom:20px;">返回</a>
+          <form action="/sendToClass" method="POST">
+           <div class="form-group">
+            <label for="classname">班級名稱</label>
+          
+            <select class="form-control" name="classname">
+                  <%　classes.forEach(function(classes){ %>
+                     <option  value="<%=classes.grade %><%=classes.category %>"><%=classes.grade %><%=classes.category %></option> 
+                  <% }); %>
+                </select>
+          </div>
+
+          <div class="form-group">
+           <label for="content">內容</label>
+           <textarea class="form-control" rows="10" name="message"></textarea>
+          </div>
+
+         <button name="post_btn" type="submit" class="btn btn-primary">傳送推播通知</button>
+        </form>
+        </div>
+</section>
+
+    <% include ../../partials/admin_scripts.ejs %>
+</body>
+</html>

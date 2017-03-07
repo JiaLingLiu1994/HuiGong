@@ -44,9 +44,16 @@
            <textarea class="form-control" rows="10" name="content"></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="image">選擇圖片</label>
-            <input type="file" id="image">
+           <div class="form-group">
+                <label for="image">圖檔</label>
+                <select class="form-control" name="image">
+                    <option selected value=""></option>
+                  <% if(files != "" || files != undefined || files != "undefined") { %>
+                  <% files.forEach(function(file){ %>
+                     <option value="<%= file %>"><%= file %></option>
+                  <% }); %>
+                  <% } %>
+                </select>
           </div>
 
           <div class="form-group">
@@ -67,16 +74,15 @@
          <button id="btn_submit" type="submit" class="btn btn-primary">發佈文章</button>
          </div>
         </form>
-        <form ref='uploadForm' id='uploadForm' action='/upload' method='POST' encType="multipart/form-data">
-        <input type="file" name="sampleFile" />
-        <input type='submit' value='Upload!' />
-    </form>     
+           
       </div>
     </div>
   <div class="content">
     <div class="container">
 
-     <a id="btn-new" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> 新增文章</span></a>
+     <a id="btn-new" type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"> 新增文章</span></a>
+     <a  type="button" class="btn btn-primary" href="/admin/upload"  style="margin-top: 20px;">
+         <span class="glyphicon glyphicon-upload" aria-hidden="true"> 新增圖檔</span></a>
      <!-- The Modal -->
 
       <h1>文章列表</h1>
@@ -104,6 +110,5 @@
 
 <% include ../../partials/admin_scripts.ejs %>
 <script type="text/javascript" src="/stylesheets/js/post.js"></script>
-
 </body>
 </html>
