@@ -7,15 +7,15 @@ $(document).ready(function(){
     console.log(id);
     // var chatWITH = document.getElementById(vars[4]);
     $(id).addClass('active');
-    console.log($(id));
 
-	var sendBtn = $('.sendBtn');
+    $( '#msgform' ).on( 'submitResponse', function( e, response ) {
+        console.log('done');
+    });
 
-    sendBtn.on('click', function() {
+    $('#btn').on('click', function() {
     	var messageform = document.getElementById('sendmessage');
         
     	$('form[name=msgform]').submit(function(event){
-            event.preventDefault();
             console.log("send message!");
             // setTimeout(function() {
             //     $('#msg_body').val('');

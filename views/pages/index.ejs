@@ -24,7 +24,11 @@
         </div>
         <h3><%= article.title %></h3>
         <h6>發佈人：<%= article.post_user%> 發佈時間：<%= article.post_date%></h6>
-        <p><%= article.content %></p>
+        <% if(article.content.length > 30) { %>
+          <p><%= article.content.substring(0,29) %>.....</p>
+        <% } else { %>
+          <p><%= article.content %></p>
+        <% } %>
       </a>
     </article>
 
