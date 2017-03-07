@@ -5,6 +5,7 @@ var contactbookSchema = new mongoose.Schema({
    grade: String,    
    category: String,
    content: String,
+   image: String,
    post_user: String,
    post_date: String,
    notification: {

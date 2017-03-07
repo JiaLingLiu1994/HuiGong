@@ -25,6 +25,7 @@
 
         <div id="contacts">
             <ul class="sidepanel_contact">
+
             <% teacherlist.forEach( function( teacherlist ){ %>
                 <li class="contact" id='<%= teacherlist.id %>'>
                     <div class="wrap">
@@ -55,16 +56,14 @@
             <div class="wrap">
             <form id='msgform' name='msgform' action="/chat" method="POST">
                 <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
-                
+
                 <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.username%>" >
                 
                 <% currentUser.forEach(function(currentUser){ %>
-
                 <input type="hidden" name="userId" id="userId" class="form-control" value="<%= currentUser.id%>" >
                 
                 <input type="hidden" name="userName" id="userName" class="form-control" value="<%= currentUser.username%>" >
-                
-                <% })%>
+                 <% })%>
 
                 <% var date = new Date(); %>
                 <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
@@ -79,15 +78,16 @@
         </div>   
 
         <% chats.forEach( function( chats ){ %>
-        <div class="messages" id='scrolldowndiv'>
-            <ul class="msg_area" id='autoFreshMsg'>
-            <% if (chats.userFrom == chatWith.id) {%> 
-                <li class="replies">
+        <div class="messages" id='autoFreshMsg'>
+            <ul class="msg_area">
+            <% if (chats.userFrom == currentUser.id) {%> 
+                <li class="sent">
                     <img src="/blankuser.jpg" alt="" />
                     <p><%= chats.body %></p>
                 </li>
-            <% } else {%>
-                <li class="sent">
+            <% } %>
+            <% if (chats.userFrom == chatWith.id) {%> 
+                <li class="replies">
                     <img src="/blankuser.jpg" alt="" />
                     <p><%= chats.body %></p>
                 </li>

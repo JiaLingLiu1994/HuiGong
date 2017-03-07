@@ -7,6 +7,7 @@ var articleSchema = new mongoose.Schema({
    content: String,
    post_user: String,
    post_date: String,
+   image: String,
    notification: {
        type: Boolean,
        default: false

@@ -42,24 +42,20 @@
                   <% }); %>
                 </select>
           </div>
-          <!--<div class="form-group">-->
-          <!-- <label for="grade">年級</label>-->
-          <!--   <input type="text" class="form-control" id="grade" name="grade">-->
-          <!--</div>-->
-          
-          <!--<div class="form-group">-->
-          <!-- <label for="category">班別</label>-->
-          <!--   <input type="text" class="form-control" id="category" name="category">-->
-          <!--</div>-->
 
           <div class="form-group">
            <label for="content">內容</label>
            <textarea class="form-control" rows="10" name="content"></textarea>
           </div>
 
-          <div class="form-group">
-            <label for="image">選擇圖片</label>
-            <input type="file" id="image">
+           <div class="form-group">
+                <label for="image">圖檔</label>
+                <select class="form-control" name="image">
+                    <option selected value=""></option>
+                  <% files.forEach(function(file){ %>
+                     <option value="<%= file %>"><%= file %></option>
+                  <% }); %>
+                </select>
           </div>
 
           <div class="form-group">
@@ -85,6 +81,7 @@
     <div class="container">
 
      <a id="btn-new" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"> 新增文章</span></a>
+      <a  type="button" class="btn btn-primary" href="/admin/push" style="margin-top: 20px;"><span class="glyphicon glyphicon-alert" aria-hidden="true" > 推播通知</span></a>
      <!-- The Modal -->
 
       <h1>聯絡簿列表</h1>

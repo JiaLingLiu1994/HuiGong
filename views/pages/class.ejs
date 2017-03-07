@@ -31,6 +31,12 @@
               <div class="post_name"><p>今日作業</p></div>
               <br>
               <p><%= contactbook.content %></p>
+                <%  if(contactbook.image == "" || contactbook.image == undefined) { %>
+                    <% } else { %>
+                    <a href="uploads/<%=contactbook.image%>">圖片連結</a>
+                    <% } %>
+               <div>
+          
             </div>
 
           <div class="teacher">
@@ -51,6 +57,7 @@
 
     </div> <!-- end col-md-3 -->
 </div>
+
 
 <% include ../partials/scripts.ejs %>
 

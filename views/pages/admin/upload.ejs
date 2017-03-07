@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <% include ../../partials/admin_header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/post_admin.css">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/upload.css">
+
+</head>
+
+<body>
+
+<section id="sidebar"> 
+  <div class="white-label">
+  </div> 
+  <div id="sidebar-nav">   
+    <ul>
+     <li class="active"><a href="/admin/post"></i>貼文管理</a></li>
+     <li><a href="/admin/contactbook"></i>聯絡簿管理</a></li>
+     <li><a href="/admin/classManager"></i>班級管理</a></li>
+     <li><a href="/admin/students">學生管理</a></li>
+     <li><a href="/admin/teachers">老師管理</a></li>
+     <li><a href="/admin/admin_chat/58b3361d2913430004e311ec">信箱</a></li>   
+     <li><a href="/admin/logout">登出</a></li>
+    </ul>
+  </div>
+</section>
+
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <span class="glyphicon glyphicon-cloud-upload" style="margin-bottom:20px;"></span>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar"></div>
+            </div>
+            <button class="btn btn-lg upload-btn" type="button">上傳圖檔</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input id="upload-input" type="file" name="uploads[]" multiple="multiple"></br>
+
+<% include ../../partials/admin_scripts.ejs %>
+<script type="text/javascript" src="/stylesheets/js/upload.js"></script>
+</body>
+</html>

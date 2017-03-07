@@ -6,13 +6,10 @@ $(document).ready(function(){
     console.log(id);
     $(id).addClass('active');
 
-	// var sendBtn = $('#btn');
-
-     $('#btn').on('click', function() {
+	$('#btn').on('click', function() {
         console.log("click");
-    	// var messageform = document.getElementById('sendmessage');
-    	// messageform.submit();
-    	$('form[name=msgform]').live('submit', function(){
+        // var messageform = document.getElementById('sendmessage');
+        $('form[name=msgform]').live('submit', function(){
             console.log("send message!");
         });
     });

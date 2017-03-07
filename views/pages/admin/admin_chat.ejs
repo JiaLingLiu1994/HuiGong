@@ -35,13 +35,13 @@
             <% studentlist.forEach( function( studentlist ){ %>
                 <li class="contact" id='<%= studentlist.id %>'>
                     <div class="wrap">
-                    <a href="/admin/admin_chat/<%= studentlist.id %>">
+                        <a href="/admin/admin_chat/<%= studentlist.id %>">
                         <img src="/blankuser.jpg" alt="" />
                         <div class="meta">
                             <p class="name"><%= studentlist.name %></p>
                             <p class="preview">pre view</p>
                         </div>
-                    </a>    
+                        </a>
                     </div>
                 </li>
             <% }); %>    
@@ -65,36 +65,9 @@
                 <i class="fa fa-instagram" aria-hidden="true"></i>
             </div> -->
         </div>
-
-         <div class="message-input">
-            <div class="wrap">
-            <form name='msgform' action="/admin/admin_chat" method="POST">
-                <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
-
-                <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.username%>" >
-
-                <% theUser.forEach(function(theUser){ %>
-
-                <input type="hidden" name="userId" id="userId" class="form-control" value="<%= theUser.id%>" >
-                
-
-                <input type="hidden" name="userName" id="userName" class="form-control" value="<%= theUser.username%>" >
-                
-                <% })%>
-
-                <% var date = new Date(); %>
-                <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
-
-                <textarea class="form-control" rows="1" name="content" placeholder="輸入訊息..."></textarea>
-
-                <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                <button class="sendBtn" id="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                <input hidden type="submit" name="sendmessage" id="sendmessage" />
-            </form>    
-            </div>
-        </div>   
-
-        <% chats.forEach( function( chats ){ %>
+        <div class="messages" id="autoFreshMsg">
+            <ul class="msg_area">
+                 <% chats.forEach( function( chats ){ %>
         <div class="messages" id="autoFreshMsg">
             <ul class="msg_area">
             <% if (chats.userFrom == chatWith.id) { %>     
@@ -111,6 +84,34 @@
             </ul>
         </div>
         <% }); %>
+            </ul>
+        </div>
+        <div class="message-input">
+            <div class="wrap">
+            <form name='msgform' action="/admin/admin_chat" method="POST">
+                <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
+
+                <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.username%>" >
+
+                <% theUser.forEach(function(theUser){ %>
+
+                <input type="hidden" name="userId" id="userId" class="form-control" value="<%= theUser.id%>" >
+
+                <input type="hidden" name="userName" id="userName" class="form-control" value="<%= theUser.username%>" >
+                
+                <% })%>
+
+                <% var date = new Date(); %>
+                <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
+
+                <textarea class="form-control" rows="1" name="content" placeholder="輸入訊息..."></textarea>
+
+                <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                <button class="sendBtn" id="btn"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                <input hidden type="submit" name="sendmessage" id="sendmessage" />
+            </form>    
+            </div>
+        </div>   
     </div>
     </div>
   </div>

@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>傳送推播通知給個人</title>
+ <% include ../../partials/admin_header.ejs %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/css/post_admin.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+ 
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+ 
+          <!-- Angular Material Library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+ 
+     <script type="text/javascript" src="/stylesheets/js/push.js"></script>
+ 
+</head>    
+<body>
+   
+    <div ng-app="Push" >
+ 
+  <md-content layout="row"  layout-align="center" style="background: none;">
+    <div flex="25"></div>
+ 
+    <div flex="50" ng-controller = "pushController" ng-cloak>
+  <a href="/admin/contactbook" class="btn btn-default btn-primary" type="button" style="margin-top:20px;color:white;margin-bottom:20px;">返回</a>
+  <a href="/admin/pushToClass" class="btn btn-default btn-primary" type="button" style="margin-top:20px;color:white;margin-bottom:20px;">傳送到班級</a>
+      <md-progress-linear md-mode="indeterminate" ng-show="progress"></md-progress-linear>
+      <md-list md-whiteframe="2">
+ 
+        <md-subheader class="md-no-sticky">已註冊手機總數 : <strong>{{deviceCount}}</strong></md-subheader>
+ 
+        <md-list-item  class="md-2-line" ng-repeat="device in devices" ng-click="showSendMessageDialog($event,$index)" style=" height: 20px; background: rgb(232, 232, 232) ">
+ 
+          <div class="md-list-item-text" layout="column">
+ 
+            <h3><strong>使用者帳號:{{ device.username }}</strong> , <strong>姓名:{{ device.name }}</strong> </h3>
+            <h5>裝置:{{ device.deviceName }} , IMEI : {{ device.deviceId }}</h5>
+            <md-icon class="md-secondary" ng-click="showDeleteConfirmDialog($event, $index,devices)" aria-label="Delete" >
+              <i class="material-icons">delete</i>
+            </md-icon>
+ 
+          </div>
+ 
+        </md-list-item>
+ 
+      </md-list>
+      </br>
+    </div>
+    <div flex="25"></div>
+  </md-content>
+ 
+    </div>
+    <% include ../../partials/admin_scripts.ejs %>
+</body>
+</html>

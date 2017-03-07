@@ -16,8 +16,11 @@
     "express": "4.13.3",
     "express-session": "^1.15.1",
     "mongoose": "^4.8.4",
+    "morgan": "^1.8.1",
+    "node-gcm": "^0.14.4",
     "passport": "^0.3.2",
     "passport-local-mongoose": "^4.0.0",
+    "request": "^2.79.0",
     "socket.io": "^1.7.3"
   },
   "repository": {
