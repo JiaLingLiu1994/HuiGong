@@ -138,21 +138,26 @@ app.get("/chat/:id", isLoggedIn, function(req, res){
   		});
   	},
   	function(callback){
-  		messages.find({'$or': [{'userFrom': req.user._id, 'userTo': req.params.id},
-  		{'userFrom': req.params.id, 'userTo': req.user._id}]}, function(err, filteredmessages){
+  		messages.find({'$or': [{'userFromName': req.user.username, 'userTo': req.params.id},
+  		{'userFrom': req.params.id, 'userToName': req.user.username}]}, function(err, filteredmessages){
   			callback(err, filteredmessages);
   		}, null, { sort: {timestamp: 1}});	
-  	}
+  	},
+    function(callback){
+      studentList.find({'username': req.user.username}, function(err, currentUser){
+        callback(err, currentUser);
+      });
+    }  
   ], function(err, results){
   	if(err){
       console.log(err);
     } else {
-      res.render("pages/chat", {"currentUser": req.user, "teacherlist": results[0], "chatWith": results[1], "chats": results[2]});
+      res.render("pages/chat", {"teacherlist": results[0], "chatWith": results[1], "chats": results[2], "currentUser": results[3]});
     }
   });
 });
 
-app.post("/chat/:id", function(req, res) {
+app.post("/chat", function(req, res) {
   messages.create(
   {
     body: req.body.content,
@@ -799,22 +804,27 @@ app.get("/admin/admin_chat/:id", isAdminLoggedIn, function(req, res){
   		});
   	},
   	function(callback){
-  		messages.find({'$or': [{'userFrom': req.user._id, 'userTo': req.params.id},
-  		{'userFrom': req.params.id, 'userTo': req.user._id}]}, function(err, filteredmessages){
+  		messages.find({'$or': [{'userFromName': req.user.username, 'userTo': req.params.id},
+  		{'userFrom': req.params.id, 'userToName': req.user.username}]}, function(err, filteredmessages){
   			callback(err, filteredmessages);
   		}, null, { sort: {timestamp: 1}});	
   	},
-  	function(callback){
-  		messages.find({'$or': [{'userFrom': req.user._id}, {'userTo': req.user._id}]}, function(err, filteredEachLastmessages){
-  			callback(err, filteredEachLastmessages);
-  		}, null, { sort: {timestamp: 1}});	
-  	}
-
+    function(callback){
+      teacherList.find({'username': req.user.username}, function(err, theUser){
+        callback(err, theUser);
+      });
+    }
+   //  ,
+  	// function(callback){
+  	// 	messages.find({'$or': [{'userFromName': req.user.username}, {'userToName': req.user.username}]}, function(err, filteredEachLastmessages){
+  	// 		callback(err, filteredEachLastmessages);
+  	// 	}, null, { sort: {timestamp: 1}});	
+  	// }
   ], function(err, results){
   	if(err){
       console.log(err);
     } else {
-      res.render("pages/admin/admin_chat", {"currentUser": req.user, "studentlist": results[0], "chatWith": results[1], "chats": results[2]});
+      res.render("pages/admin/admin_chat", {"studentlist": results[0], "chatWith": results[1], "chats": results[2], "theUser": results[3]});
     }
   });
 });
@@ -833,6 +843,7 @@ app.post("/admin/admin_chat", function(req, res) {
       console.log(err);
     } else {
       console.log("SUCCESS ADD THE MESSAGE");
+      res.redirect("/admin/admin_chat/:id");
     }
   }) 
 });

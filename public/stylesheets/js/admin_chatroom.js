@@ -6,12 +6,13 @@ $(document).ready(function(){
     console.log(id);
     $(id).addClass('active');
 
-	var sendBtn = $('.sendBtn');
+	// var sendBtn = $('#btn');
 
-    sendBtn.on('click', function() {
-    	var messageform = document.getElementById('sendmessage');
+     $('#btn').on('click', function() {
+        console.log("click");
+    	// var messageform = document.getElementById('sendmessage');
     	// messageform.submit();
-    	$('form[name=msgform]').submit(function(){
+    	$('form[name=msgform]').live('submit', function(){
             console.log("send message!");
         });
     });

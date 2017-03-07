@@ -116,7 +116,10 @@
     position: relative;
 }
 
-
+#sidepanel #contacts ul li.contact .wrap a:hover {
+    text-decoration: none;
+    -moz-text-decoration: none;
+}
 
 /*#frame #sidepanel #contacts ul li.contact .wrap span {
     position: absolute;

@@ -25,7 +25,6 @@
 
         <div id="contacts">
             <ul class="sidepanel_contact">
-
             <% teacherlist.forEach( function( teacherlist ){ %>
                 <li class="contact" id='<%= teacherlist.id %>'>
                     <div class="wrap">
@@ -52,35 +51,20 @@
             <p> <%= chatWith.name %></p>
         </div>
 
-        <% chats.forEach( function( chats ){ %>
-        <div class="messages" id='autoFreshMsg'>
-            <ul class="msg_area">
-            <% if (chats.userFrom == currentUser.id) {%> 
-                <li class="sent">
-                    <img src="/blankuser.jpg" alt="" />
-                    <p><%= chats.body %></p>
-                </li>
-            <% } %>
-            <% if (chats.userFrom == chatWith.id) {%> 
-                <li class="replies">
-                    <img src="/blankuser.jpg" alt="" />
-                    <p><%= chats.body %></p>
-                </li>
-            <% } %>    
-            </ul>
-        </div>
-        <% }); %>
-
         <div class="message-input">
             <div class="wrap">
-            <form name='msgform' action="/chat/<%= chatWith.id%>" method="POST">
+            <form id='msgform' name='msgform' action="/chat" method="POST">
                 <input type="hidden" name="receiverId" id="receiverId" class="form-control" value="<%= chatWith.id%>" >
-
-                <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.name%>" >
+                
+                <input type="hidden" name="receiverName" id="receiverName" class="form-control" value="<%= chatWith.username%>" >
+                
+                <% currentUser.forEach(function(currentUser){ %>
 
                 <input type="hidden" name="userId" id="userId" class="form-control" value="<%= currentUser.id%>" >
                 
                 <input type="hidden" name="userName" id="userName" class="form-control" value="<%= currentUser.username%>" >
+                
+                <% })%>
 
                 <% var date = new Date(); %>
                 <input hidden type="text" id="date" placeholder="2099/01/31" name="timestamp" value="<%= date.getFullYear() %>年<%= (date.getMonth())+1 %>月<%= date.getDate() %>日/ <%= date.getHours()%>:<%= date.getMinutes()%>:<%= date.getSeconds()%>">
@@ -93,11 +77,30 @@
             </form>    
             </div>
         </div>   
+
+        <% chats.forEach( function( chats ){ %>
+        <div class="messages" id='scrolldowndiv'>
+            <ul class="msg_area" id='autoFreshMsg'>
+            <% if (chats.userFrom == chatWith.id) {%> 
+                <li class="replies">
+                    <img src="/blankuser.jpg" alt="" />
+                    <p><%= chats.body %></p>
+                </li>
+            <% } else {%>
+                <li class="sent">
+                    <img src="/blankuser.jpg" alt="" />
+                    <p><%= chats.body %></p>
+                </li>
+            <% } %>    
+            </ul>
+        </div>
+        <% }); %>
     </div>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/4d5ece1593.js"></script>
 <!-- <script type="text/javascript" src="/stylesheets/js/chat.js"></script> -->
